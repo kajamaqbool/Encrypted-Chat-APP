@@ -8,7 +8,7 @@ A full-stack real-time chat application built with the **MERN stack**, **Socket.
 
 ## 🚀 Live Demo
 
-🌐 [View Live App](https://encrypted-chat-app.onrender.com)
+🌐 [View Live App](https://encrypted-chat-app.onrender.com) &nbsp;|&nbsp; 📁 [GitHub Repo](https://github.com/kajamaqbool/Encrypted-Chat-APP)
 
 ---
 
@@ -80,8 +80,8 @@ Encrypted Chat APP/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/thoufiqh56/encrypted-chat-app.git
-cd encrypted-chat-app
+git clone https://github.com/kajamaqbool/Encrypted-Chat-APP.git
+cd Encrypted-Chat-APP
 ```
 
 ### 2. Set up environment variables
@@ -141,10 +141,10 @@ The Express backend serves the React frontend in production mode.
 
 ## 👤 Author
 
-**Thoufiq**  
+**Kaja Maqbool (Thoufiq)**  
 Full Stack Developer  
-📧 thoufiqh56@example.com  
-🔗 [GitHub](https://github.com/thoufiqh56)
+🔗 [GitHub](https://github.com/kajamaqbool)  
+📁 [This Repository](https://github.com/kajamaqbool/Encrypted-Chat-APP)
 
 ---
 
