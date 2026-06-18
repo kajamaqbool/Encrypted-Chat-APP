@@ -8,7 +8,7 @@ A full-stack real-time chat application built with the **MERN stack**, **Socket.
 
 ## 🚀 Live Demo
 
-🌐 [View Live App](https://encrypted-chat-app.onrender.com) &nbsp;|&nbsp; 📁 [GitHub Repo](https://github.com/kajamaqbool/Encrypted-Chat-APP)
+🌐 [View Live App](https://encrypted-chat-app-vhst.onrender.com) &nbsp;|&nbsp; 📁 [GitHub Repo](https://github.com/kajamaqbool/Encrypted-Chat-APP)
 
 ---
 
