@@ -1,8 +1,8 @@
-# 💬 Encrypted Chat App
+# 💬 Encrypted Chat App (AI-Powered)
 
-A full-stack real-time chat application built with the **MERN stack**, **Socket.IO**, and **JWT authentication**. Features instant messaging, image sharing, online presence tracking, and cloud-based media storage — all deployed on the cloud.
+A modern full-stack real-time chat application built with the **MERN stack**, **WebSockets (Socket.IO)**, **Client-Side End-to-End Encryption (AES-GCM 256-bit)**, and **Google Gemini AI**. Features instant encrypted messaging, AI smart replies, tone rewriting, conversation summaries, dedicated AI bot companion, read receipts, and cloud media storage.
 
-> Built by **Thoufiq** — Full Stack Developer
+> Built by **Thoufiq (Kaja Maqbool)** — Full Stack Developer
 
 ---
 
@@ -12,17 +12,28 @@ A full-stack real-time chat application built with the **MERN stack**, **Socket.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- 🔐 **Authentication & Authorization** — Secure signup/login with JWT stored in HTTP-only cookies
-- ⚡ **Real-time Messaging** — Instant message delivery using Socket.IO WebSockets
-- 🟢 **Online User Status** — See who's currently active in real time
-- 🖼️ **Image Sharing** — Upload and send images via Cloudinary
-- 🌓 **Theme Support** — Multiple UI themes powered by DaisyUI
-- 🗂️ **Global State Management** — Clean state handling with Zustand
-- 🛡️ **Protected Routes** — JWT middleware guards all private API endpoints
-- 📱 **Responsive Design** — Works on desktop and mobile
-- 🔥 **Error Handling** — Graceful error handling on both client and server
+### 🔒 End-to-End Cryptography (E2EE)
+- **Client-Side AES-GCM 256-bit**: Messages are encrypted locally in the browser using the native Web Crypto API before transmission.
+- **Ciphertext Storage**: MongoDB Atlas only stores ciphertexts and initialization vectors (`iv`). The server never reads raw user conversations.
+- **Verification Safety Fingerprints**: Interactive 16-digit safety code modal for authenticating end-to-end encryption keys.
+- **Backwards-Compatible**: Graceful fallback support for legacy unencrypted messages.
+
+### 🤖 Intelligent AI Capabilities (Google Gemini)
+- **AI Smart Reply Chips**: Contextual 1-tap reply suggestions above the composer (like LinkedIn / Gmail).
+- **AI Message Polisher ("✨ Tone & Grammar")**: Rewrite drafts into *Professional*, *Casual*, *Concise*, or *Grammar-corrected* text on the fly.
+- **AI Conversation Summarizer**: Generates a crisp 3-bullet executive summary and key action items from any chat history.
+- **Nova AI Companion Bot**: Dedicated in-app conversational assistant pinned in the sidebar for 24/7 questions, brainstorming, and assistance.
+
+### ⚡ Real-Time Chat UX
+- **Live Typing Indicators**: Real-time animated typing bubbles and status indicators.
+- **Read & Delivery Receipts**: WhatsApp-style status checkmarks (✓ sent, ✓✓ delivered, ✓✓ blue/seen).
+- **Sidebar Contact Search**: Live search and filter contacts by name or email.
+- **Last Message Previews & Unread Badges**: Real-time unread message counter badges and snippets.
+- **Online Presence**: Instant online/offline status tracking with green indicators.
+- **Image Sharing**: Upload and send images via Cloudinary.
+- **Theme Customization**: 32 DaisyUI themes with real-time switching.
 
 ---
 
@@ -32,10 +43,12 @@ A full-stack real-time chat application built with the **MERN stack**, **Socket.
 | Technology | Purpose |
 |---|---|
 | React 18 | UI library |
-| Vite | Build tool & dev server |
+| Vite | High-performance bundler & dev server |
+| Web Crypto API | Client-side AES-GCM 256-bit cryptography |
 | Zustand | Global state management |
 | Socket.IO Client | Real-time WebSocket connection |
-| TailwindCSS + DaisyUI | Styling & UI components |
+| TailwindCSS + DaisyUI | Styling & responsive theme components |
+| Lucide React | Modern icons |
 | Axios | HTTP requests |
 | React Router v6 | Client-side routing |
 
@@ -43,12 +56,12 @@ A full-stack real-time chat application built with the **MERN stack**, **Socket.
 | Technology | Purpose |
 |---|---|
 | Node.js + Express | REST API server |
-| Socket.IO | Real-time bidirectional communication |
-| MongoDB + Mongoose | Database & ODM |
-| JWT | Authentication tokens |
-| Cloudinary | Image upload & storage |
+| Google Gemini API | LLM for Smart Replies, Polishing & Nova AI |
+| Socket.IO | Real-time bidirectional WebSockets |
+| MongoDB Atlas + Mongoose | Database & ODM |
+| JWT + HTTP-Only Cookies | Secure authentication |
+| Cloudinary | Cloud-based media storage |
 | bcryptjs | Password hashing |
-| cookie-parser | HTTP cookie handling |
 
 ---
 
@@ -58,18 +71,19 @@ A full-stack real-time chat application built with the **MERN stack**, **Socket.
 Encrypted Chat APP/
 ├── backend/
 │   └── src/
-│       ├── controllers/    # Route handler logic
+│       ├── controllers/    # Route handlers (auth, message, ai)
 │       ├── middleware/     # Auth middleware (JWT)
-│       ├── models/         # Mongoose schemas (User, Message)
-│       ├── routes/         # API routes
+│       ├── models/         # Mongoose schemas (User, Message with iv/status)
+│       ├── routes/         # Express routes (auth, message, ai)
 │       ├── lib/            # DB, Cloudinary, Socket setup
 │       └── index.js        # Express app entry point
 ├── frontend/
 │   └── src/
-│       ├── components/     # Reusable UI components
-│       ├── pages/          # Page-level components
-│       ├── store/          # Zustand state stores
-│       └── lib/            # Axios instance & utilities
+│       ├── components/     # UI components (SmartReplies, Polish, Security modal)
+│       ├── lib/            # Crypto (AES-GCM), Axios, utils
+│       ├── pages/          # Home, Login, Signup, Profile, Settings
+│       ├── store/          # Zustand stores (useAuthStore, useChatStore, useAiStore)
+│       └── index.css       # Tailwind entry
 └── package.json            # Root build & start scripts
 ```
 
@@ -97,21 +111,20 @@ CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
+# Optional: Google Gemini API Key for AI features (Free from Google AI Studio)
+GEMINI_API_KEY=your_gemini_api_key
+
 NODE_ENV=development
 ```
 
 ### 3. Install dependencies & run
 
 ```bash
-# Install all dependencies and start frontend + backend
-cd backend && npm install
-cd ../frontend && npm install
-
 # Terminal 1 — Start backend
-cd backend && npm start
+cd backend && npm install && npm run dev
 
 # Terminal 2 — Start frontend
-cd frontend && npm run dev
+cd frontend && npm install && npm run dev
 ```
 
 Frontend runs at: `http://localhost:5173`  
@@ -126,16 +139,6 @@ Backend runs at: `http://localhost:5001`
 npm run build   # builds frontend into /frontend/dist
 npm start       # backend serves the built frontend
 ```
-
----
-
-## 🌐 Deployment
-
-This app is deployed on **Render** as a single service.  
-The Express backend serves the React frontend in production mode.
-
-**Environment:** Set all `.env` variables in Render's dashboard.  
-**MongoDB:** Allow all IPs (`0.0.0.0/0`) in MongoDB Atlas Network Access.
 
 ---
 

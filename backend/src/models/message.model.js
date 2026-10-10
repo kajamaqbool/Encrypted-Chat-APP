@@ -18,6 +18,15 @@ const messageSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    iv: {
+      type: String,
+      default: null,
+    },
+    status: {
+      type: String,
+      enum: ["sent", "delivered", "seen"],
+      default: "sent",
+    },
   },
   { timestamps: true }
 );
